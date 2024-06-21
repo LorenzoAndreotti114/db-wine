@@ -72,6 +72,14 @@ class WineController extends Controller
 
         // Trovo il vino specifico tramite l'ID
         $wine = Wine::findOrFail($id);
+
+        //Aggiorniamo i capi del wine
+        $wine->winery = $request->input('winery');
+        $wine->wine = $request->input('wine');
+        $wine->rating_average = $request->input('rating_average');
+        $wine->rating_reviews = $request->input('rating_reviews');
+        $wine->location = $request->input('location');
+        $wine->image = $request->input('image');
     }
 
     /**
