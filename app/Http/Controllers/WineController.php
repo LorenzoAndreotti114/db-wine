@@ -22,7 +22,7 @@ class WineController extends Controller
      //GianLivio
     public function create()
     {
-        //
+        return view("wines.create");
     }
 
     /**
