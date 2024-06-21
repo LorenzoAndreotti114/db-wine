@@ -80,6 +80,13 @@ class WineController extends Controller
         $wine->rating_reviews = $request->input('rating_reviews');
         $wine->location = $request->input('location');
         $wine->image = $request->input('image');
+
+        // Salva le modifiche
+        $wine->save();
+
+        // Reindirizza con un messaggio di successo
+        return redirect()->route('wines.index')->with('success', 'Wine updated successfully.');
+
     }
 
     /**
