@@ -9,21 +9,23 @@ use Illuminate\Support\Facades\Storage;
 class WineController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. Gianlivio
      */
     public function index()
     {
-        //
+        // Recupero ii vini dal database
+        $wines = Wine::all();
+
+        return view('wines.index', compact('wines'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
 
-    //GianLivio
+    //Omar
     public function create()
     {
-        return view("wines.create");
     }
 
     /**
@@ -56,15 +58,18 @@ class WineController extends Controller
             return redirect()->route('wines.index')->with('success', 'Wine created successfully.');
     }
 
-    //fine Gianlivio
+    //fine Omar
     /**
      * Display the specified resource.
      */
 
-    //Omar
+     //Omar
     public function show(string $id)
     {
-        //
+        $wine = Wine::findOrFail($id);
+
+       
+        return view('wines.show', compact('wine'));
     }
 
     /**
@@ -72,10 +77,12 @@ class WineController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        $wine = Wine::findOrFail($id);
+        return view('wines.edit', compact('wine'));
     }
 
-    //fine Omar
+    //fine Gianlivio
     /**
      * Update the specified resource in storage.
      */
