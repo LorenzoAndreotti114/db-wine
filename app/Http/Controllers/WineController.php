@@ -83,7 +83,33 @@ class WineController extends Controller
     //Constantin
     public function update(Request $request, string $id)
     {
-        //
+        // Validazione degli input
+        $request->validate([
+            "winery"=> "required|string|max:255",
+            "wine"=> "required|string|max:255",
+            "rating"=> "required|numeric|min:255|max:5",
+            "rating_reviews"=> "required|integer|min:0",
+            "location"=> "required|string|max:255",
+            "image"=> "nullable|url",
+        ]);
+
+        // Trovo il vino specifico tramite l'ID
+        $wine = Wine::findOrFail($id);
+
+        //Aggiorniamo i capi del wine
+        $wine->winery = $request->input('winery');
+        $wine->wine = $request->input('wine');
+        $wine->rating_average = $request->input('rating_average');
+        $wine->rating_reviews = $request->input('rating_reviews');
+        $wine->location = $request->input('location');
+        $wine->image = $request->input('image');
+
+        // Salva le modifiche
+        $wine->save();
+
+        // Reindirizza con un messaggio di successo
+        return redirect()->route('wines.index')->with('success', 'Wine updated successfully.');
+
     }
 
     /**
@@ -91,7 +117,15 @@ class WineController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Trova il vino specifico tramite l'ID
+        $wine = Wine::findOrFail($id);
+
+        // Elimina il vino
+        $wine->delete();
+
+        // Reindirizza con un messaggio di successo
+        return redirect()->route('wines.index')->with('success', 'Wine deleted successfully.');
+
     }
 
     //fine constantin
