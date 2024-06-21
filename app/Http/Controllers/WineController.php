@@ -18,6 +18,8 @@ class WineController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+     //GianLivio
     public function create()
     {
         //
@@ -31,9 +33,12 @@ class WineController extends Controller
         //
     }
 
+    //fine Gianlivio
     /**
      * Display the specified resource.
      */
+
+     //Omar
     public function show(string $id)
     {
         //
@@ -47,9 +52,12 @@ class WineController extends Controller
         //
     }
 
+    //fine Omar
     /**
      * Update the specified resource in storage.
      */
+
+     //Constantin
     public function update(Request $request, string $id)
     {
         //
@@ -62,4 +70,6 @@ class WineController extends Controller
     {
         //
     }
+
+    //fine constantin
 }
