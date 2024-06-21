@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wine;
+use Illuminate\Support\Facades\Storage;
 
 class WineController extends Controller
 {
@@ -19,7 +20,7 @@ class WineController extends Controller
      * Show the form for creating a new resource.
      */
 
-     //GianLivio
+    //GianLivio
     public function create()
     {
         return view("wines.create");
@@ -30,7 +31,22 @@ class WineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validazione dei valori della tabella richiesti
+        $request->validated();
+
+        if ($request->hasFile('image')) {
+            // Salvo il file nel storage e mi crea una nuova cartella in public chiamata wine_images
+            $image_path = Storage::put('wine_images', $request->image);
+            // salvo il path del file nei dati da inserire nel daabase
+            $data['image'] = $image_path;
+        }
+            // Creazione di un nuovo oggetto Wine e salvataggio nel database
+            $newWine = new Wine();
+            $newWine->fill($data);
+            $newWine->save();;
+        
+            // Redirezione alla rotta desiderata con un messaggio di successo
+            return redirect()->route('wines.index')->with('success', 'Wine created successfully.');
     }
 
     //fine Gianlivio
@@ -38,7 +54,7 @@ class WineController extends Controller
      * Display the specified resource.
      */
 
-     //Omar
+    //Omar
     public function show(string $id)
     {
         //
@@ -57,7 +73,7 @@ class WineController extends Controller
      * Update the specified resource in storage.
      */
 
-     //Constantin
+    //Constantin
     public function update(Request $request, string $id)
     {
         //
