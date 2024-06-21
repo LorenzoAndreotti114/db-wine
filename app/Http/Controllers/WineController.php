@@ -60,7 +60,15 @@ class WineController extends Controller
      //Constantin
     public function update(Request $request, string $id)
     {
-        //
+        // Validazione degli input
+        $request->validate([
+            "winery"=> "required|string|max:255",
+            "wine"=> "required|string|max:255",
+            "rating"=> "required|numeric|min:255|max:5",
+            "rating_reviews"=> "required|integer|min:0",
+            "location"=> "required|string|max:255",
+            "image"=> "nullable|url",
+        ]);
     }
 
     /**
