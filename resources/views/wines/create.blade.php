@@ -3,6 +3,16 @@
 @section('content')
 <div class="container">
     <h1>Create a New Wine Entry</h1>
+    @if ($errors->any())
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+@endif
     <form action="{{ route('wines.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
