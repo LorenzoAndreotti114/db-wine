@@ -31,8 +31,15 @@ class WineController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'winery' => 'nullable|string|max:255',
+            'wine' => 'required|string|max:255',
+            'rating_average' => 'required',
+            'rating_reviews' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'image' => 'required',
+        ]);
         //validazione dei valori della tabella richiesti
-        $request->validated();
 
         if ($request->hasFile('image')) {
             // Salvo il file nel storage e mi crea una nuova cartella in public chiamata wine_images
