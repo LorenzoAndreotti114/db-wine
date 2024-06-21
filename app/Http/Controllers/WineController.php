@@ -69,6 +69,9 @@ class WineController extends Controller
             "location"=> "required|string|max:255",
             "image"=> "nullable|url",
         ]);
+
+        // Trovo il vino specifico tramite l'ID
+        $wine = Wine::findOrFail($id);
     }
 
     /**
